@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tumani Selatan - Merajut Cerita, Merawat Budaya</title>
+    <style>
+        /* ============================================================
+           1. Palet Warna Estetik (Earth Tones) & Tipografi (Tetap)
+           ============================================================ */
+        :root {
+            --bg-color: #FAFAF5; /* Putih tulang / Krem sangat muda */
+            --text-main: #4A463F; /* Abu-abu kecoklatan gelap */
+            --accent: #8E735B; /* Coklat tanah/Moka */
+            --white: #FFFFFF;
+            --heading-font: 'Georgia', 'Times New Roman', serif;
+            --body-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            font-family: var(--body-font);
+            line-height: 1.8;
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* Scroll navigasi halus */
+        }
+
+        /* ============================================================
+           2. Navigasi (Diperbarui dengan menu Kegiatan)
+           ============================================================ */
+        nav {
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            z-index: 100; /* Pastikan di atas slider */
+        }
+        .logo { font-family: var(--heading-font); font-size: 1.5rem; letter-spacing: 2px; color: var(--text-main); font-weight: bold; }
+        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav a { color: var(--text-main); text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.3s; font-weight: bold; }
+        nav a:hover { color: var(--accent); }
+
+        /* ============================================================
+           3. Hero Section (Tetap)
+           ============================================================ */
+        .hero-aesthetic {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        .hero-aesthetic::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('img/utama.png'); /* Pastikan path gambar benar */
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        .hero-aesthetic h1 { 
+            font-family: var(--heading-font); 
+            font-size: 5vw; 
+            font-weight: normal;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+        .hero-aesthetic p { 
+            font-size: 1.1rem; 
+            max-width: 500px; 
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* ============================================================
+           4. Layout Struktur Umum (Tetap)
+           ============================================================ */
+        .section-padding { padding: 120px 10%; }
+        .offset-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            margin-bottom: 150px;
+        }
+        .offset-grid:nth-child(even) { flex-direction: row-reverse; }
+
+        .image-container {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            background-color: #D6D2C4; /* Placeholder */
+            border-radius: 200px 200px 0 0; /* Bentuk lengkung/arch */
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); font-style: italic;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .text-container {
+            flex: 1;
+            min-width: 300px;
+            padding: 40px;
+        }
+        .text-container h2 {
+            font-family: var(--heading-font);
+            font-size: 2.5rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        /* ============================================================
+           5. Potensi Grid (Tetap)
+           ============================================================ */
+        .potensi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        .item-estetik { text-align: center; }
+        .item-estetik .gambar {
+            width: 100%;
+            height: 350px;
+            background-color: #E2DFD8;
+            margin-bottom: 20px;
+            transition: transform 0.5s ease;
+            background-size: cover;
+            background-position: center;
+        }
+        .item-estetik:hover .gambar { transform: scale(0.98); }
+        .item-estetik h3 { font-family: var(--heading-font); font-weight: normal; font-size: 1.5rem; margin-bottom: 10px; color: var(--accent);}
+
+        /* ============================================================
+           6. BARU: Slider Kegiatan (Automatic Fade Carousel)
+           ============================================================ */
+        .kegiatan-slider-section {
+            padding: 100px 10%;
+            background-color: #F0EFEA; /* Sedikit berbeda untuk membedakan section */
+            margin-top: 100px;
+        }
+
+        /* Container Utama Slider menggunakan Flexbox (Teks Kiri, Gambar Kanan) */
+        .slider-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            position: relative;
+            min-height: 500px; /* Tinggi minimum section slider */
+        }
+
+        /* Panel Teks (Kiri) */
+        .slider-text-panel {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        /* Panel Gambar (Kanan) */
+        .slider-image-panel {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px; /* Sudut sedikit melengkung agar estetik */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        /* Pengaturan untuk setiap Item Slide (Teks & Gambar memudar bersamaan) */
+        .slide-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0; /* Sembunyi secara default */
+            transition: opacity 1s ease-in-out; /* Efek memudar 1 detik */
+            z-index: 1;
+            display: flex; /* Untuk menyelaraskan teks di panel teks */
+            align-items: center;
+        }
+
+        /* Item Slide yang Aktif */
+        .slide-item.active {
+            opacity: 1; /* Muncul */
+            z-index: 2;
+            position: relative; /* Agar panel teks mengambil ruang */
+        }
+
+        /* Karena gambar absolut, kita perlu mendefinisikan strukturnya di dalam slide-item aktif */
+        .slide-item.active .slider-image {
+            position: absolute; /* Gambar tetap absolut di panelnya sendiri */
+        }
+
+        /* Styling khusus Teks di dalam Slide */
+        .slider-text-content {
+            padding: 40px 0;
+        }
+        .slider-text-content h3 {
+            font-family: var(--heading-font);
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+        .slider-text-content p {
+            font-size: 1rem;
+            color: var(--text-main);
+            max-width: 450px;
+        }
+
+        /* Styling khusus Gambar di dalam Slide */
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Indikator Titik (Dots) di bawah slider */
+        .slider-dots {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #D6D2C4;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            cursor: pointer;
+        }
+        .dot.active {
+            background-color: var(--accent);
+        }
+
+        /* ============================================================
+           7. Footer & Animasi Reveal (Tetap)
+           ============================================================ */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid #E2DFD8;
+            font-size: 0.9rem;
+            color: var(--accent);
+            background-color: var(--bg-color);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+
+        /* ============================================================
+           8. RESPONSIVITAS MOBILE HP (Diperbarui untuk Slider)
+           ============================================================ */
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 15px; padding: 20px; background: rgba(250, 250, 245, 0.9); position: fixed; }
+            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center;}
+            .hero-aesthetic h1 { font-size: 12vw; }
+            .section-padding { padding: 80px 5%; }
+            .offset-grid, .offset-grid:nth-child(even) { flex-direction: column; text-align: center; gap: 30px; margin-bottom: 80px;}
+            .text-container { padding: 10px; }
+            .image-container { height: 350px; width: 100%; border-radius: 100px 100px 0 0; }
+            .image-container.reverse-radius { border-radius: 0 0 100px 100px !important; }
+
+            /* Responsivitas Slider di Mobile */
+            .kegiatan-slider-section { padding: 60px 5%; }
+            .slider-wrapper {
+                flex-direction: column-reverse; /* Teks di atas gambar di mobile */
+                gap: 20px;
+                text-align: center;
+                min-height: auto;
+            }
+            .slider-text-panel, .slider-image-panel {
+                width: 100%;
+            }
+            .slider-image-panel {
+                height: 300px; /* Gambar lebih pendek di mobile */
+            }
+            .slide-item {
+                flex-direction: column;
+                position: relative; /* Kembali ke relatif agar teks tidak tumpang tindih */
+                opacity: 0;
+                display: none; /* Sembunyikan total agar tidak mengambil ruang saat tidak aktif */
+            }
+            .slide-item.active {
+                display: flex;
+                opacity: 1;
+                position: relative;
+            }
+            /* Sinkronisasi panel mobile: posisikan elemen teks dan gambar di dalam wrapper mobile */
+            .slider-text-content p { max-width: 100%; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">TUMANI SELATAN</div>
+        <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="#kisah">Kisah</a></li>
+            <li><a href="#pesona">Pesona</a></li>
+            <li><a href="#kegiatan">Kegiatan</a></li> <li><a href="PerangkatDesa.html">Pemerintahan</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero-aesthetic">
+        <h1 class="reveal active">Tumani Selatan</h1>
+        <p class="reveal active delay-1">Merajut cerita, merawat budaya, dan menghidupkan harmoni alam.</p>
+    </header>
+
+    <main class="section-padding">
+        
+        <section class="offset-grid" id="kisah">
+            <div class="image-container reveal" style="background-image: url('img/sejarah.jpg');">
+                [ Foto Estetik Jejak Tumani Selatan ]
+            </div>
+            <div class="text-container reveal delay-1">
+                <h2>Jejak & Waktu</h2>
+                <p>Kisah Tumani berawal dari kata <strong>"Itani"</strong> dalam bahasa Tountemboan yang berarti <em>"Ditanamkan"</em>. Sebuah nama yang disepakati oleh para Tonaas pada tahun 1911, menjadi doa yang mengakar kuat bersamaan dengan berdirinya gereja pertama di tanah ini.</p><br>
+                <p>Seiring berjalannya waktu, semangat untuk terus bertumbuh membawa pemekaran wilayah. Tepat pada 28 Juli 2010, Tumani Selatan resmi mekar dan berdiri sendiri. Dari 510 jiwa yang mengawali langkah di empat jaga, kini Tumani Selatan terus merajut ceritanya di bawah kepemimpinan yang silih berganti, merawat warisan para pendahulu dengan penuh kebanggaan.</p>
+            </div>
+        </section>
+
+        <section class="offset-grid">
+            <div class="text-container reveal">
+                <h2>Tanah yang Ditanamkan</h2>
+                <p>Sesuai dengan makna namanya, Tumani Selatan dianugerahi kekayaan alam dan lahan yang sangat subur. Kehidupan warga berjalan selaras dengan alam, melahirkan tradisi agraris yang kuat.</p><br>
+                <p>Sektor pertanian, perkebunan, hingga peternakan bukan hanya menjadi roda penggerak ekonomi, tetapi juga bentuk syukur dan harmoni masyarakat dalam mengelola titipan semesta.</p>
+            </div>
+            <div class="image-container reveal delay-1 reverse-radius" style="border-radius: 0 0 200px 200px; background-image: url('img/warga.jpg');">
+                [ Foto Estetik Kegiatan Warga / Sawah ]
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-top: 100px;" id="pesona">
+            <h2 class="reveal" style="font-family: var(--heading-font); font-size: 2.5rem; color: var(--accent);">Pesona & Karya</h2>
+        </div>
+        
+        <section class="potensi-grid">
+            <div class="item-estetik reveal">
+                <div class="gambar" style="background-image: url('img/panen.jpg');"></div>
+                <h3>Bumi & Panen</h3>
+                <p>Dari hamparan sawah lahir <strong>Beras Superwin</strong> berkualitas premium. Dilengkapi dengan suburnya ladang jagung, kelapa, cengkeh, hingga nilam yang menjadi penopang kesejahteraan warga.</p>
+            </div>
+            <div class="item-estetik reveal delay-1">
+                <div class="gambar" style="background-image: url('img/ternak.jpg');"></div>
+                <h3>Satu Terpal, Sejuta Kehidupan</h3>
+                <p>Selain bertani, warga mengelola peternakan babi dan ayam dengan apik. Ketersediaan air tawar juga dimanfaatkan untuk budidaya Ikan Mujair dan Ikan Mas yang jadi primadona pasar.</p>
+            </div>
+            <div class="item-estetik reveal delay-2">
+                <div class="gambar" style="background-image: url('img/alam.jpg');"></div>
+                <h3>Ruang Teduh</h3>
+                <p>Harmoni antara persawahan, perkebunan rempah, dan keramahan warga menjadikan Tumani Selatan bukan sekadar tempat tinggal, melainkan ruang yang menenangkan jiwa.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <section class="kegiatan-slider-section reveal" id="kegiatan">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-family: var(--heading-font); font-size: 2.5rem; color: var(--accent); font-weight: normal;">Lensa Kegiatan</h2>
+            <p style="font-style: italic; color: var(--text-main); margin-top: 10px;">Potret kebersamaan dan pembangunan di Tumani Selatan.</p>
+        </div>
+
+        <div class="slider-wrapper">
+            
+            <div class="slider-text-panel" id="sliderTextPanel">
+                <div class="slide-item active">
+                    <div class="slider-text-content">
+                        <h3>Posyandu Berjalan</h3>
+                        <p>Kegiatan rutin pemeriksaan kesehatan ibu, anak, dan lansia untuk memastikan kesejahteraan masyarakat sejak dini. Kolaborasi kader desa dan tenaga kesehatan.</p>
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="slider-text-content">
+                        <h3>Membangun Infrastruktur</h3>
+                        <p>Semangat gotong royong warga dalam perbaikan jalan desa dan saluran irigasi guna mendukung kelancaran mobilitas pertanian dan ekonomi.</p>
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="slider-text-content">
+                        <h3>Penyuluhan Pertanian</h3>
+                        <p>Edukasi rutin bagi kelompok tani mengenai teknik budidaya Beras Superwin yang lebih efisien dan ramah lingkungan untuk meningkatkan hasil panen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-image-panel" id="sliderImagePanel">
+                <div class="slide-item active">
+                    <div class="slider-image" style="background-image: url('img/kegiatan_posyandu.jpg');">
+                        <span style="color:white; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-style:italic;">[ Foto Posyandu ]</span>
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="slider-image" style="background-image: url('img/kegiatan_jalan.jpg');">
+                        <span style="color:white; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-style:italic;">[ Foto Gotong Royong ]</span>
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="slider-image" style="background-image: url('img/kegiatan_tani.jpg');">
+                        <span style="color:white; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-style:italic;">[ Foto Penyuluhan ]</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="slider-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+    </section>
+
+    <footer>
+        <p>Website ini dibuat oleh Mahasiswa KKT Angkatan 146 UNSRAT</p>
+    </footer>
+
+    <script>
+        /* 1. Fungsi Reveal on Scroll (Tetap) */
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); /* Jalankan sekali saat load */
+
+        /* 2. BARU: JAVASCRIPT UNTUK SLIDER KEGIATAN OTOMATIS */
+        let slideIndex = 0;
+        let slideTimeout;
+
+        // Fungsi utama untuk memutar slide
+        function showSlides() {
+            // Ambil semua item slide dari panel teks dan gambar
+            const textPanel = document.getElementById("sliderTextPanel");
+            const imagePanel = document.getElementById("sliderImagePanel");
+            const textSlides = textPanel.getElementsByClassName("slide-item");
+            const imageSlides = imagePanel.getElementsByClassName("slide-item");
+            const dots = document.getElementsByClassName("dot");
+
+            // Sembunyikan semua slide (hapus class active)
+            for (let i = 0; i < textSlides.length; i++) {
+                textSlides[i].classList.remove("active");
+                imageSlides[i].classList.remove("active");
+                dots[i].classList.remove("active");
+            }
+
+            // Tambah index
+            slideIndex++;
+            // Kembali ke awal jika sudah di akhir
+            if (slideIndex > textSlides.length) { slideIndex = 1; }
+
+            // Tampilkan slide yang aktif (tambah class active)
+            textSlides[slideIndex - 1].classList.add("active");
+            imageSlides[slideIndex - 1].classList.add("active");
+            dots[slideIndex - 1].classList.add("active");
+
+            // Atur waktu putar otomatis (5000ms = 5 detik)
+            slideTimeout = setTimeout(showSlides, 5000);
+        }
+
+        // Fungsi untuk navigasi manual melalui titik (dots)
+        function currentSlide(n) {
+            // Hentikan timer otomatis saat manual diklik
+            clearTimeout(slideTimeout);
+            // Set index (n adalah index array mulai dari 0, showSlides butuh mulai dari 1)
+            slideIndex = n; 
+            // Jalankan fungsi tampilkan
+            showSlides();
+        }
+
+        // Jalankan slider pertama kali
+        showSlides();
+    </script>
+</body>
+</html>
