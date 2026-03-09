@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pemerintah Desa Tumani Selatan</title>
     <style>
-        /* Menggunakan variabel warna yang sama dengan halaman utama */
+        /* Palet Warna Estetik */
         :root {
             --bg-color: #FAFAF5; 
             --text-main: #4A463F; 
@@ -42,7 +42,7 @@
 
         /* Hero Mini untuk Halaman Dalam */
         .hero-mini {
-            height: 50vh; /* Lebih pendek dari beranda */
+            height: 50vh; 
             min-height: 400px;
             display: flex;
             flex-direction: column;
@@ -56,7 +56,7 @@
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('img/kantor-desa.jpg'); /* Foto kantor desa atau latar estetik */
+            background-image: url('img/kantor-desa.jpg'); /* Ganti dengan foto Balai Desa */
             background-size: cover;
             background-position: center;
             z-index: -1;
@@ -75,12 +75,12 @@
         /* Grid Profil Perangkat Desa */
         .profil-struktur {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
         .profil-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 50px;
+            gap: 60px 40px;
             margin-top: 40px;
             justify-items: center;
         }
@@ -89,10 +89,11 @@
             width: 100%;
             max-width: 250px;
         }
-        /* Penyesuaian Rasio Foto 1:1 (Persegi) yang Dibulatkan */
+        
+        /* Penyesuaian Foto & Teks */
         .profil-img {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             background-color: #D6D2C4;
             margin: 0 auto 20px;
@@ -107,26 +108,34 @@
         }
         .profil-name {
             font-family: var(--heading-font);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--accent);
             margin-bottom: 5px;
+            line-height: 1.3;
         }
         .profil-title {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-main);
-            font-style: italic;
+            font-weight: bold;
             border-top: 1px solid #E2DFD8;
             padding-top: 10px;
             margin-top: 10px;
+        }
+        .profil-nik {
+            font-size: 0.8rem;
+            color: #8c8a82;
+            margin-top: 2px;
+            letter-spacing: 1px;
         }
 
         /* Kelas Animasi */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.2s; }
-        .delay-2 { transition-delay: 0.4s; }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
 
-        /* Mega Footer (Sama dengan halaman utama) */
+        /* Footer */
         .footer-modern { background-color: #3A3630; color: #D6D2C4; padding: 80px 10% 30px; margin-top: 50px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
         .footer-col h4 { font-family: var(--heading-font); font-size: 1.5rem; color: #FAFAF5; margin-bottom: 20px; font-weight: normal; }
@@ -135,8 +144,10 @@
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(214, 210, 196, 0.1); font-size: 0.85rem; }
 
         @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; padding: 20px; background: rgba(250, 250, 245, 0.9); }
+            nav { flex-direction: column; gap: 15px; padding: 20px; background: rgba(250, 250, 245, 0.9); position: fixed;}
+            nav ul { flex-wrap: wrap; justify-content: center; }
             .hero-mini h1 { font-size: 2.5rem; }
+            .section-padding { padding: 120px 5% 60px; }
         }
     </style>
 </head>
@@ -148,6 +159,7 @@
             <li><a href="index.html">Beranda</a></li>
             <li><a href="index.html#kisah">Kisah</a></li>
             <li><a href="index.html#pesona">Pesona</a></li>
+            <li><a href="index.html#kegiatan">Kegiatan</a></li>
             <li><a href="perangkat-desa.html" style="color: var(--accent);">Pemerintahan</a></li>
         </ul>
     </nav>
@@ -160,43 +172,92 @@
     <main class="section-padding">
         
         <div class="profil-struktur reveal">
-            <div class="profil-card" style="margin: 0 auto;">
-                <div class="profil-img" style="background-image: url('img/hukum-tua.jpg'); width: 220px; height: 220px;"></div>
-                <h3 class="profil-name">Grace Sigar, SH</h3>
-                <p class="profil-title">Pejabat Hukum Tua</p>
+            <div class="profil-card" style="margin: 0 auto; max-width: 300px;">
+                <div class="profil-img" style="background-image: url('img/meike.jpg'); width: 200px; height: 200px;"></div>
+                <h3 class="profil-name">Meike Lombogia, SE</h3>
+                <p class="profil-title">Hukum Tua</p>
+                <p class="profil-nik">NIK: 7105164905680001</p>
             </div>
         </div>
 
         <div class="profil-grid">
+            
             <div class="profil-card reveal">
-                <div class="profil-img" style="background-image: url('img/sekdes.jpg');"></div>
-                <h3 class="profil-name">[Nama Sekdes]</h3>
+                <div class="profil-img" style="background-image: url('img/vonne.jpg');"></div>
+                <h3 class="profil-name">Vonne Mamahit</h3>
                 <p class="profil-title">Sekretaris Desa</p>
+                <p class="profil-nik">NIK: 710516808710001</p>
             </div>
             
             <div class="profil-card reveal delay-1">
-                <div class="profil-img" style="background-image: url('img/jaga1.jpg');"></div>
-                <h3 class="profil-name">[Nama Kepala Jaga]</h3>
-                <p class="profil-title">Kepala Jaga I</p>
+                <div class="profil-img" style="background-image: url('img/fanly.jpg');"></div>
+                <h3 class="profil-name">Fanly Lombogia</h3>
+                <p class="profil-title">Kepala Seksi Pemerintahan</p>
+                <p class="profil-nik">NIK: 7105160610810003</p>
             </div>
 
             <div class="profil-card reveal delay-2">
-                <div class="profil-img" style="background-image: url('img/jaga2.jpg');"></div>
-                <h3 class="profil-name">[Nama Kepala Jaga]</h3>
-                <p class="profil-title">Kepala Jaga II</p>
+                <div class="profil-img" style="background-image: url('img/anastasya.jpg');"></div>
+                <h3 class="profil-name">Anastasya Sumilat</h3>
+                <p class="profil-title">Kepala Seksi Kesejahteraan</p>
+                <p class="profil-nik">NIK: 7105167105970001</p>
+            </div>
+
+            <div class="profil-card reveal delay-3">
+                <div class="profil-img" style="background-image: url('img/ribka.jpg');"></div>
+                <h3 class="profil-name">Ribka Laoh</h3>
+                <p class="profil-title">Kepala Seksi Pelayanan</p>
+                <p class="profil-nik">NIK: 7105165505930001</p>
             </div>
 
             <div class="profil-card reveal">
-                <div class="profil-img" style="background-image: url('img/jaga3.jpg');"></div>
-                <h3 class="profil-name">[Nama Kepala Jaga]</h3>
-                <p class="profil-title">Kepala Jaga III</p>
+                <div class="profil-img" style="background-image: url('img/donny.jpg');"></div>
+                <h3 class="profil-name">Donny Wonok</h3>
+                <p class="profil-title">Kepala Urusan Keuangan</p>
+                <p class="profil-nik">NIK: 7105160210780001</p>
             </div>
 
             <div class="profil-card reveal delay-1">
-                <div class="profil-img" style="background-image: url('img/jaga4.jpg');"></div>
-                <h3 class="profil-name">[Nama Kepala Jaga]</h3>
-                <p class="profil-title">Kepala Jaga IV</p>
+                <div class="profil-img" style="background-image: url('img/linda.jpg');"></div>
+                <h3 class="profil-name">Linda Wonok</h3>
+                <p class="profil-title">Kepala Urusan Perencanaan</p>
+                <p class="profil-nik">NIK: 7105164504780001</p>
             </div>
+
+            <div class="profil-card reveal delay-2">
+                <div class="profil-img" style="background-image: url('img/albrits.jpg');"></div>
+                <h3 class="profil-name">Albrits Franklin Tendean</h3>
+                <p class="profil-title">Kaur Tata Usaha dan Umum</p> <p class="profil-nik">NIK: 7105162508810001</p>
+            </div>
+
+            <div class="profil-card reveal delay-3">
+                <div class="profil-img" style="background-image: url('img/yolanda.jpg');"></div>
+                <h3 class="profil-name">Yolanda Mowilos</h3>
+                <p class="profil-title">Kepala Jaga 1</p>
+                <p class="profil-nik">NIK: 7105166701770001</p>
+            </div>
+
+            <div class="profil-card reveal">
+                <div class="profil-img" style="background-image: url('img/deysi.jpg');"></div>
+                <h3 class="profil-name">Deysi Tewal</h3>
+                <p class="profil-title">Kepala Jaga 2</p>
+                <p class="profil-nik">NIK: 7105164912790001</p>
+            </div>
+
+            <div class="profil-card reveal delay-1">
+                <div class="profil-img" style="background-image: url('img/alter.jpg');"></div>
+                <h3 class="profil-name">Alter Momongan</h3>
+                <p class="profil-title">Kepala Jaga 3</p>
+                <p class="profil-nik">NIK: 7105161404700001</p>
+            </div>
+
+            <div class="profil-card reveal delay-2">
+                <div class="profil-img" style="background-image: url('img/frengky.jpg');"></div>
+                <h3 class="profil-name">Frengky Woruntu</h3>
+                <p class="profil-title">Kepala Jaga 4</p>
+                <p class="profil-nik">NIK: 7105160702690001</p>
+            </div>
+
         </div>
 
     </main>
@@ -212,6 +273,7 @@
                 <a href="index.html">Beranda</a>
                 <a href="index.html#kisah">Jejak Sejarah</a>
                 <a href="index.html#pesona">Potensi Desa</a>
+                <a href="index.html#kegiatan">Kegiatan</a>
                 <a href="perangkat-desa.html">Pemerintah Desa</a>
             </div>
             <div class="footer-col">
@@ -237,7 +299,7 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal();
+        reveal(); // Jalankan sekali saat load
     </script>
 </body>
 </html>
